@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A Claude Code plugin that recommends the right model and effort level at the start of every session — before any tokens are spent.">
+  <title>Model Advisor — Claude Code Plugin</title>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Model Advisor — Claude Code Plugin">
+  <meta property="og:description" content="Pick the right model before you burn a single token. A Claude Code plugin that recommends the right model and effort level at session start.">
+  <meta property="og:url" content="https://jaace.github.io/claude-model-advisor/">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Model Advisor — Claude Code Plugin">
+  <meta name="twitter:description" content="Pick the right model before you burn a single token. A Claude Code plugin that recommends the right model and effort level at session start.">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23f59e0b'>~</text></svg>">
+  <link rel="stylesheet" href="https://jaace.github.io/theme/style.css">
+  <style>
+    .hero-icon {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand"><span>~</span>/model-advisor</span>
+    <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="display:none">
+        <circle cx="8" cy="8" r="3"/>
+        <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41"/>
+      </svg>
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M13.5 8.5a5.5 5.5 0 01-7-7 5.5 5.5 0 107 7z"/>
+      </svg>
+    </button>
+    <a href="https://github.com/Jaace/claude-model-advisor" class="nav-github">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+      </svg>
+      GitHub
+    </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <p class="eyebrow">Claude Code Plugin</p>
+    <svg class="hero-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="6" y1="4" x2="6" y2="20"></line>
+      <line x1="12" y1="4" x2="12" y2="20"></line>
+      <line x1="18" y1="4" x2="18" y2="20"></line>
+      <rect x="4" y="15" width="4" height="2.5" rx="1"></rect>
+      <rect x="10" y="10" width="4" height="2.5" rx="1"></rect>
+      <rect x="16" y="6" width="4" height="2.5" rx="1"></rect>
+    </svg>
+    <h1>Model Advisor</h1>
+    <p class="byline">by <a href="https://github.com/Jaace">@Jaace</a></p>
+    <p class="tagline">Pick the right model before you burn a single token.</p>
+    <div class="install-cta" id="install-cta">
+      <code><span class="prompt-sign">/</span>plugin marketplace add Jaace/claude-model-advisor</code>
+      <button class="copy-btn" id="copy-btn" aria-label="Copy install command" title="Copy">
+        <svg class="icon-copy" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="5" y="5" width="9" height="9" rx="1.5"/>
+          <path d="M11 5V3.5A1.5 1.5 0 009.5 2H3.5A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5"/>
+        </svg>
+        <svg class="icon-check" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="display:none">
+          <polyline points="2.5 8.5 6 12 13.5 4.5"/>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- Terminal demo -->
+  <div class="terminal-section">
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+      <div class="terminal-body" id="terminal-demo"></div>
+    </div>
+    <button class="terminal-replay" id="terminal-replay" aria-label="Replay demo" title="Replay demo">↻ replay</button>
+  </div>
+
+  <!-- How it works -->
+  <section>
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li>Reads your first message</li>
+      <li>Assesses task complexity and the type of reasoning required</li>
+      <li>Recommends a specific model and effort level with a one-line rationale</li>
+      <li>Pauses — so you can switch models before any tokens are spent</li>
+    </ol>
+  </section>
+
+  <!-- Model table -->
+  <section>
+    <h2>Model guidance</h2>
+    <table class="model-table">
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Effort</th>
+          <th>Best for</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="model-name">Haiku</span></td>
+          <td><span class="t-dim">—</span></td>
+          <td>Simple lookups, quick edits, boilerplate, single-fact questions</td>
+        </tr>
+        <tr>
+          <td><span class="model-name">Sonnet</span></td>
+          <td>
+            <div class="effort-tags">
+              <button class="tag" data-effort-text="Straightforward renames, simple explanations, applying well-known patterns — the answer shape is already clear">low</button>
+              <button class="tag accent" data-effort-text="Coding, debugging, refactoring, explanations, any question with tradeoffs or nuanced judgment">medium</button>
+              <button class="tag" data-effort-text="Complex debugging with unclear root causes, deep refactoring with hard tradeoffs, tangled multi-step problems">high</button>
+            </div>
+          </td>
+          <td><span class="best-for-text">Coding, debugging, refactoring, explanations, any question with tradeoffs or nuanced judgment</span></td>
+        </tr>
+        <tr>
+          <td><span class="model-name">Opus</span></td>
+          <td>
+            <div class="effort-tags">
+              <button class="tag" data-effort-text="Explaining established architectural patterns or comparing well-known design tradeoffs — needs depth but the answer exists">low</button>
+              <button class="tag" data-effort-text="Designing systems with real constraints, planning migrations, architectural decisions where the problem is well-defined">medium</button>
+              <button class="tag" data-effort-text="Novel multi-system architecture, hard math, genuinely ambiguous design problems with many interdependent constraints">high</button>
+              <button class="tag accent" data-effort-text="Novel multi-system architecture, hard math, genuinely ambiguous open-ended design problems">max</button>
+            </div>
+          </td>
+          <td><span class="best-for-text">Novel multi-system architecture, hard math, genuinely ambiguous open-ended design problems</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="table-note">Effort defaults to <code>auto</code> when not specified — Claude decides based on the task.</p>
+  </section>
+
+  <!-- /model-check -->
+  <section>
+    <h2>Mid-session reassessment</h2>
+    <div class="command-callout">
+      <span class="cmd">/model-check</span>
+      <p>Run this anytime during a session to reassess the current task and get an updated model and effort recommendation.</p>
+    </div>
+  </section>
+
+  <!-- Install -->
+  <section>
+    <h2>Install</h2>
+    <span class="code-label">Install</span>
+    <div class="code-wrap">
+      <div class="code-block"><span class="c-slash">/</span>plugin marketplace add Jaace/claude-model-advisor
+<span class="c-slash">/</span>plugin install model-advisor@claude-model-advisor</div>
+      <button class="code-copy-btn" data-copy="/plugin marketplace add Jaace/claude-model-advisor&#10;/plugin install model-advisor@claude-model-advisor" aria-label="Copy" title="Copy"><svg class="icon-copy" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 009.5 2H3.5A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5"/></svg><svg class="icon-check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><polyline points="2.5 8.5 6 12 13.5 4.5"/></svg></button>
+    </div>
+
+    <span class="code-label">Update</span>
+    <div class="code-wrap">
+      <div class="code-block"><span class="c-slash">/</span>plugin marketplace update claude-model-advisor
+<span class="c-slash">/</span>plugin update model-advisor</div>
+      <button class="code-copy-btn" data-copy="/plugin marketplace update claude-model-advisor&#10;/plugin update model-advisor" aria-label="Copy" title="Copy"><svg class="icon-copy" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 009.5 2H3.5A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5"/></svg><svg class="icon-check" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><polyline points="2.5 8.5 6 12 13.5 4.5"/></svg></button>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-note">Built by <a href="https://github.com/Jaace">@Jaace</a></span>
+    <div class="footer-links">
+      <a href="https://jason-boyle.com" class="footer-site-link"><svg width="14" height="15" viewBox="0 0 710 782" xmlns="http://www.w3.org/2000/svg"><g transform="translate(17.306,0.792)"><g transform="translate(0.5,0.409)"><path d="M112.43,520L337.27,649.81V390.19L112.43,260.38V520Z" fill="#358AC4"/><path d="M337.27,649.81V779.62L0.01,584.91L112.43,520L337.27,649.81Z" fill="#FACF8D"/><path d="M112.43,519.8V258.8L0.01,195.48V584.8L112.43,519.8Z" fill="#D46661"/><path d="M112.43,260.38L337.27,390.19L562.11,260.38L337.27,130.57L112.43,260.38Z" fill="#3996D5"/><path d="M337.27,649.81L562.11,520V260.38L337.27,390.19V649.81Z" fill="#358AC4"/><path d="M337.27,649.81V779.62L674.52,584.91L562.11,520L337.27,649.81Z" fill="#E0B97E"/><path d="M562.11,520V260.38L674.52,195.48V584.91L562.11,520Z" fill="#2ABFA7"/><path d="M562.11,260.38L337.27,130.57V0.76L674.52,195.48L562.11,260.38Z" fill="#31CCB0"/><path d="M112.43,260.38L0.01,195.48L337.27,0.76V130.57L112.43,260.38Z" fill="#EF746D"/></g></g><path d="M-18.09,647.02L1.45,681.02H391.47L371.55,647.52H-18.09Z" fill="#353F52" transform="translate(186.69,664.02)rotate(30)translate(-186.69,-664.02)"/><path d="M-51.26,408.44H727.66L708.13,374.47H-31.77L-51.26,408.44Z" fill="#353F52" transform="translate(338.2,391.46)rotate(270)translate(-338.2,-391.46)"/><path d="M337.17,685.74L692.23,684.37L710.19,651.9H320.42L337.17,685.74Z" fill="#3D4860" transform="translate(515.3,668.82)rotate(150)translate(-515.3,-668.82)"/><path d="M358.01,492.43L726.76,490.32L708.67,456.82L338.26,458.23L358.01,492.43Z" fill="#3D4860" transform="translate(532.51,474.62)rotate(210)translate(-532.51,-474.62)"/><path d="M708.72,135.26L691.15,101.62H338.13L338.19,135.45L708.72,135.26Z" fill="#3D4860" transform="translate(523.43,118.53)rotate(210)translate(-523.43,-118.53)"/><path d="M665.1,323.62H726.21L707.58,289.14H364.82L345.69,323.24L665.1,323.62Z" fill="#3D4860" transform="translate(535.95,306.38)rotate(150)translate(-535.95,-306.38)"/><path d="M744.45,394.55L747.54,361.61H14.31L-4.62,394.55H744.45Z" fill="#3D4860" transform="translate(371.46,378.08)rotate(90)translate(-371.46,-378.08)"/></svg>jason-boyle.com</a>
+      <a href="https://github.com/Jaace/claude-model-advisor">GitHub</a>
+    </div>
+  </footer>
+
+  <script src="https://jaace.github.io/theme/theme.js"></script>
+  <script src="https://jaace.github.io/theme/terminal.js"></script>
+  <script>
+    TerminalDemo.run({
+      demo: '#terminal-demo',
+      replay: '#terminal-replay',
+      examples: [
+        {
+          prompt: "what's the default port for postgres?",
+          verb: 'Discombobulating',
+          sec: 3,
+          label: 'Recommended: ',
+          result: 'Haiku',
+          note: 'simple factual lookup, no reasoning needed.',
+          footer: 'Run /model to switch before we start, or should I proceed?'
+        },
+        {
+          prompt: 'refactor the auth module to use JWT instead of sessions',
+          verb: 'Transmuting',
+          sec: 4,
+          label: 'Recommended: ',
+          result: 'Sonnet / medium',
+          note: 'focused refactor with a clear path; swapping session auth for JWT across the module.',
+          footer: 'Run /model to switch before we start, or should I proceed?'
+        },
+        {
+          prompt: 'design a real-time collaborative editing system with conflict resolution',
+          verb: 'Philosophising',
+          sec: 5,
+          label: 'Recommended: ',
+          result: 'Opus / high',
+          note: 'multi-system architecture with open-ended design, likely involving hard tradeoffs across data consistency, conflict resolution strategies, and real-time sync.',
+          footer: 'Run /model to switch before we start, or should I proceed?'
+        }
+      ]
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "claude-model-advisor",
+  "metadata": {
+    "description": "Recommends the right Claude model and effort level at session start"
+  },
+  "owner": {
+    "name": "Jason Boyle"
+  },
+  "plugins": [
+    {
+      "name": "model-advisor",
+      "description": "Recommends the right Claude model (Haiku/Sonnet/Opus) and effort level at session start by analyzing your first message, then pauses so you can switch before work begins.",
+      "source": "./.claude-plugin/plugins/model-advisor",
+      "category": "productivity"
+    }
+  ]
+}
